@@ -1,0 +1,24 @@
+{
+    "Months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ],
+    "config_sql":{
+        "user": "sa",
+        "password": "Avi123456",
+        "server": "localhost",
+        "database": "Barbershop",
+        "trustServerCertificate": true
+    },
+    "url_mongoDb":"mongodb+srv://shakuri_avi:A123456@cluster0.sesz7.mongodb.net/?retryWrites=true&w=majority"
+}
