@@ -5,7 +5,7 @@ const command = require("./commands.js")
 const getHairStyles = async() => {
     response = {}
     const data = await command.getAll()
-    console.log(data);
+    return data
 }
 
 module.exports = {
