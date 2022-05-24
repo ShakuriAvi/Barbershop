@@ -1,7 +1,9 @@
 //db.js
-const exec = require('./functions')
+const exec = require('./commands')
 const { MongoClient } = require('mongodb')
-const URL = `mongodb+srv://shakuri_avi:A123456@cluster0.sesz7.mongodb.net/?retryWrites=true&w=majority`;
+const settings = require("../settings.json")
+
+const URL = settings.url_mongoDb;
 const insertOne = async function(appointment) {
     const client = new MongoClient(URL);
     try {
