@@ -10,6 +10,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "bluebird": "^3.7.2",
         "body-parser": "^1.20.0",
         "cors": "^2.8.5",
         "express": "^4.18.1",
@@ -17,6 +18,7 @@
         "mongoose": "^6.3.4",
         "msnodesqlv8": "^2.4.8",
         "mssql": "^8.1.1",
-        "nodemon": "^2.0.16"
+        "nodemon": "^2.0.16",
+        "redis": "^3.1.2"
     }
 }
