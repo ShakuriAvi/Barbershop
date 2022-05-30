@@ -1,4 +1,4 @@
-const settings = require("../settings.json")
+const settings = require("../../settings.json")
 const sqlDb = require("mssql")
 
 async function connectDB() {
@@ -16,7 +16,7 @@ async function connectDB() {
         return err;
     }
 }
-module.exports = {
-    connectDB,
 
+module.exports = {
+    connectDB
 };

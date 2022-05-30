@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./actions')
+const controller = require('./controller')
+
 router.get('/', async(req, res) => {
-    const response = await db.getHairStyles();
+    const response = await controller.getAll();
     // console.log(response);
     res.json(
         response)

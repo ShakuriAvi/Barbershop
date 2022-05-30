@@ -1,14 +1,14 @@
 //db.js
 const exec = require('./commands')
 const { MongoClient } = require('mongodb')
-const settings = require("../settings.json")
-
+const settings = require("../../settings.json")
+const dbName = "HairStyle"
 const URL = settings.url_mongoDb;
-const insertOne = async function(appointment) {
+const insertOne = async function(item) {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.createOneListing(client, "May", appointment)
+        await exec.createOneListing(client, dbName, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -39,7 +39,7 @@ const insertMany = async function() {
     }]
     try {
         await client.connect();
-        await exec.createMultipleListings(client, "May", arr)
+        await exec.createMultipleListings(client, dbName, arr)
     } catch (e) {
         console.error(e);
     } finally {
@@ -47,18 +47,18 @@ const insertMany = async function() {
     }
 }
 
-const getAppointmentByName = async() => {
+const getByName = async(name) => {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.findOneListingByName(client, "May", "Avi")
+        await exec.findOneListingByName(client, dbName, name)
     } catch (e) {
         console.error(e);
     } finally {
         await client.close();
     }
 }
-const getAllAppointment = async() => {
+const getAll = async() => {
     const client = new MongoClient(URL);
     try {
         await client.connect();
@@ -71,19 +71,19 @@ const getAllAppointment = async() => {
     }
 
 }
-const updateAppointment = async() => {
+const updateItem = async(nameItem, newItem) => {
     const client = new MongoClient(URL);
-    const updateListing = {
-        date: "14.5.2022",
-        hour: 11.5,
-        until: 12,
-        name_customer: "Sapir",
-        name_hair_style: "David"
+    // const updateListing = {
+    //     date: "14.5.2022",
+    //     hour: 11.5,
+    //     until: 12,
+    //     name_customer: "Sapir",
+    //     name_hair_style: "David"
 
-    }
+    // }
     try {
         await client.connect();
-        await exec.updateListingByName(client, "May", "Avi", updateListing)
+        await exec.updateListingByName(client, dbName, nameItem, newItem)
     } catch (e) {
         console.error(e);
     } finally {
@@ -92,7 +92,7 @@ const updateAppointment = async() => {
 }
 
 
-const upsertAppointment = async() => {
+const upsertItem = async(nameItem, item) => {
     const client = new MongoClient(URL);
     const updateListing = {
         date: "14.5.2022",
@@ -104,7 +104,7 @@ const upsertAppointment = async() => {
     }
     try {
         await client.connect();
-        await exec.upsertListingByName(client, "May", "Avi", updateListing)
+        await exec.upsertListingByName(client, dbName, nameItem, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -113,12 +113,12 @@ const upsertAppointment = async() => {
 }
 
 
-const deleteAppointment = async(appointment) => {
+const deleteItem = async(item) => {
     const client = new MongoClient(URL);
 
     try {
         await client.connect();
-        await exec.deleteListing(client, "May", appointment)
+        await exec.deleteListing(client, dbName, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -127,11 +127,11 @@ const deleteAppointment = async(appointment) => {
 }
 
 
-const deleteMany = async function() {
+const deleteMany = async function(name) {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.deleteMultipleListings(client, "May", "Sapir")
+        await exec.deleteMultipleListings(client, dbName, name)
     } catch (e) {
         console.error(e);
     } finally {
@@ -144,10 +144,10 @@ const deleteMany = async function() {
 module.exports = {
     insertOne,
     insertMany,
-    getAppointmentByName,
-    getAllAppointment,
-    updateAppointment,
-    upsertAppointment,
-    deleteAppointment,
+    getByName,
+    getAll,
+    updateItem,
+    upsertItem,
+    deleteItem,
     deleteMany
 };

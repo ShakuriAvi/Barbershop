@@ -1,5 +1,5 @@
 const dbName = "appointment_2022"
-const settings = require("../settings.json")
+const settings = require("../../settings.json")
 async function createOneListing(client, nameTBL, newListing) {
     const result = await client.db(dbName).collection(nameTBL).insertOne(newListing);
     console.log(`New listing created with the following id: ${result.insertedId}`);

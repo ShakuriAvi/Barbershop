@@ -7,11 +7,11 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 const port = 3000;
-const mongoRouter = require('./mongoDB/routes');
-const mySQLRouter = require('./mySql/routes');
+const appointmentRouter = require('./Appointments/routes');
+const hairStyleRouter = require('./HairStyles/routes');
 
-app.use('/api/appointment', mongoRouter);
-app.use('/api/hair_style', mySQLRouter);
+app.use('/api/appointment', appointmentRouter);
+app.use('/api/hair_style', hairStyleRouter);
 
 app.get("/", function(req, res) {
     res.send("Hello Avi");
