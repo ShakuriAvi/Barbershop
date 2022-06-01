@@ -1,4 +1,4 @@
-node_moudles/
+node_moudles
 settings.json
 
 #Ignore thumbnails created by Windows
@@ -31,3 +31,4 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
 *.dll
+/node_modules/.bin/is-ci
