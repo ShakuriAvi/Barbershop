@@ -5,7 +5,10 @@ const getAll = async() => {
     const data = await db.getAll()
     return data
 }
+async function insertOne(item) {
+    db.insertOne(item)
+}
 module.exports = {
     getAll,
-
+    insertOne
 };

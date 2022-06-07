@@ -3,7 +3,7 @@ const sqlDb = require("mssql")
 
 async function getAll() {
     const DB = await conn.connectDB();
-    const _query = "select * from hairstyle"
+    const _query = "select * from appointments"
     try {
         const result = await DB.request()
             .query(_query);
@@ -23,7 +23,7 @@ async function insertOne(item) {
     let value = []
     const date = new Date(item["date"])
     console.log(date);
-    const _query = `INSERT INTO appointments (customer_name,hair_style_name,start_time,end_time,date) VALUES (@customer_name,@hair_style_name,@start_time,@end_time,@date)`
+    const _query = `INSERT INTO appointments (customer_name,hair_style_name,start_time,end_time,date,phone) VALUES (@customer_name,@hair_style_name,@start_time,@end_time,@date,@phone)`
     try {
         const result = await DB.request()
             .input("customer_name", sqlDb.VarChar(50), item["customer_name"])
@@ -31,7 +31,9 @@ async function insertOne(item) {
             .input("start_time", sqlDb.VarChar(50), item["start_time"])
             .input("end_time", sqlDb.VarChar(50), item["end_time"])
             .input("date", sqlDb.DateTime, date)
-            .query(_query);
+            .input("phone", sqlDb.VarChar(50), item["phone"])
+
+        .query(_query);
 
         return result.recordset;
     } catch (err) {

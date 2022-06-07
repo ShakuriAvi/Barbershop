@@ -1,4 +1,4 @@
-const dbName = "appointment_2022"
+const dbName = "Barbershop"
 const settings = require("../../settings.json")
 async function createOneListing(client, nameTBL, newListing) {
     const result = await client.db(dbName).collection(nameTBL).insertOne(newListing);
@@ -19,16 +19,10 @@ async function findOneListingByName(client, nameTBL, nameOfListing) {
         console.log(`No listings found with the name '${nameOfListing}`);
     }
 }
-async function findAllListing(client) {
-    const months = settings.Months
-    let appointmentsByMonths = {}
-    for (const month of months) {
-        appointmentsByMonths[month] = []
-        const result = await client.db(dbName).collection(month).find({}).forEach(element => {
-            appointmentsByMonths[month].push(element)
-        });
-    }
-    return appointmentsByMonths
+async function findAllListing(client, nameTBL) {
+    const result = await client.db(dbName).collection(nameTBL).find({}).toArray();
+    console.log(result);
+    return result
 }
 async function updateListingByName(client, nameTBL, nameOfListing, updateListing) {
     const result = await client.db(dbName).collection(nameTBL).updateOne({ name_customer: nameOfListing }, { $set: updateListing })

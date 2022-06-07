@@ -2,13 +2,13 @@
 const exec = require('./commands')
 const { MongoClient } = require('mongodb')
 const settings = require("../../settings.json")
-const dbName = "HairStyle"
+const nameTBL = "HairStyle"
 const URL = settings.url_mongoDb;
 const insertOne = async function(item) {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.createOneListing(client, dbName, item)
+        await exec.createOneListing(client, nameTBL, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -39,7 +39,7 @@ const insertMany = async function() {
     }]
     try {
         await client.connect();
-        await exec.createMultipleListings(client, dbName, arr)
+        await exec.createMultipleListings(client, nameTBL, arr)
     } catch (e) {
         console.error(e);
     } finally {
@@ -51,7 +51,7 @@ const getByName = async(name) => {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.findOneListingByName(client, dbName, name)
+        await exec.findOneListingByName(client, nameTBL, name)
     } catch (e) {
         console.error(e);
     } finally {
@@ -62,7 +62,7 @@ const getAll = async() => {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        const response = await exec.findAllListing(client)
+        const response = await exec.findAllListing(client, nameTBL)
         return response
     } catch (e) {
         console.error(e);
@@ -83,7 +83,7 @@ const updateItem = async(nameItem, newItem) => {
     // }
     try {
         await client.connect();
-        await exec.updateListingByName(client, dbName, nameItem, newItem)
+        await exec.updateListingByName(client, nameTBL, nameItem, newItem)
     } catch (e) {
         console.error(e);
     } finally {
@@ -104,7 +104,7 @@ const upsertItem = async(nameItem, item) => {
     }
     try {
         await client.connect();
-        await exec.upsertListingByName(client, dbName, nameItem, item)
+        await exec.upsertListingByName(client, nameTBL, nameItem, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -118,7 +118,7 @@ const deleteItem = async(item) => {
 
     try {
         await client.connect();
-        await exec.deleteListing(client, dbName, item)
+        await exec.deleteListing(client, nameTBL, item)
     } catch (e) {
         console.error(e);
     } finally {
@@ -131,7 +131,7 @@ const deleteMany = async function(name) {
     const client = new MongoClient(URL);
     try {
         await client.connect();
-        await exec.deleteMultipleListings(client, dbName, name)
+        await exec.deleteMultipleListings(client, nameTBL, name)
     } catch (e) {
         console.error(e);
     } finally {
