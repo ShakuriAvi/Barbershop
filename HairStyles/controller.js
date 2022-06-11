@@ -1,4 +1,4 @@
-const db = require('./mongoDB/actions')
+const db = require('./mongoDB/manager')
 
 const getAll = async() => {
     response = {}

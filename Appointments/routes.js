@@ -15,6 +15,15 @@ router.post('/insert_new_one', async(req, res) => {
     const response = await controller.insertOne(appointment);
     res.json("success")
 })
+
+router.post('/best_haircut', async(req, res) => {
+    const appointment = req.body
+        // console.log("insert_new_one", appointment);
+    const response = await controller.getBestHairStyleByDate(appointment);
+    console.log(response);
+    res.json(response)
+})
+
 router.put('/delete_one', async(req, res) => {
     const appointment = req.body
     console.log("delete_one", appointment);

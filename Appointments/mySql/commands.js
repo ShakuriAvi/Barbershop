@@ -17,7 +17,27 @@ async function getAll() {
         DB.close();
     }
 }
+async function getBestHairStyleByDate(item) {
+    const DB = await conn.connectDB();
+    let value = []
+    const date = new Date(item["date"])
+    console.log(date);
+    const _query = `select hair_style_name,count(*) as num_appointments from appointments where date >= (@start_date) AND date <=(@end_date) group by hair_style_name;`
+    try {
+        const result = await DB.request()
+            .input("start_date", sqlDb.VarChar(50), item["start_date"])
+            .input("end_date", sqlDb.VarChar(50), item["end_date"])
 
+        .query(_query);
+        console.log("command " + result.recordset);
+        return result.recordset;
+    } catch (err) {
+        console.log('Error querying database', err);
+        return err;
+    } finally {
+        DB.close();
+    }
+}
 async function insertOne(item) {
     const DB = await conn.connectDB();
     let value = []
@@ -67,5 +87,6 @@ async function deleteOne(item) {
 module.exports = {
     getAll,
     insertOne,
-    deleteOne
+    deleteOne,
+    getBestHairStyleByDate
 };

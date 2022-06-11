@@ -1,4 +1,4 @@
-const db = require('./mySql/actions')
+const db = require('./mySql/manager')
 const redis = require('./redis/actions')
 
 const getAll = async() => {
@@ -10,6 +10,12 @@ const insertOne = async(appointment) => {
     const response = await db.insertOne(appointment);
     console.log(response);
 }
+const getBestHairStyleByDate = async(times) => {
+    const response = await db.getBestHairStyleByDate(times);
+    return response
+
+}
+
 
 const deleteOne = async(appointment) => {
     const response = await db.deleteOne(appointment);
@@ -18,5 +24,6 @@ const deleteOne = async(appointment) => {
 module.exports = {
     getAll,
     insertOne,
-    deleteOne
+    deleteOne,
+    getBestHairStyleByDate
 };

@@ -12,9 +12,16 @@ const deleteOne = async(item) => {
     const response = await command.deleteOne(item);
     return response;
 }
+const getBestHairStyleByDate = async(item) => {
+    const response = await command.getBestHairStyleByDate(item);
+    console.log("manager " + response);
+
+    return response;
+}
 module.exports = {
     getAll,
     insertOne,
-    deleteOne
+    deleteOne,
+    getBestHairStyleByDate
 
 };
